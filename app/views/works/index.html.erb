@@ -1,2 +1,10 @@
 <h1>Works</h1>
-<h2><%=@works.inspect %></h2>
+<% @works.each do |work| %>
+  <div>
+    <h2><%= work.title %></h2>
+    <p><%= work.description %></p><br />
+    <i><%= work.instrumentation %></i><br />
+  </div>
+
+  <hr />
+<% end %>

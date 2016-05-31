@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>NMC</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div id="wrap">
+  <nav class="navbar navbar-light bg-faded">
+    <div class="nav navbar-nav">
+      <a class="nav-item nav-link active" href="#">NMC <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link" href="#">About</a>
+    </div>
+  </nav>
+  
+  <% if notice.present? %>
+    <p class="alert alert-info"><%= notice %></p>
+  <% end %>
+  <% if alert.present? %>
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
+  
+  <%= yield %>
+  
+</div>
 
-<%= yield %>
+<br class='clr' />
+
+</div>
+<div id="footer">
+  <div class="container">
+    <b>Footer Here</b>
+    <br />
+    <%= link_to 'Link', '#' %>
+  </div>
+</div>
 
 </body>
 </html>

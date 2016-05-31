@@ -2,9 +2,9 @@ class CreateWorks < ActiveRecord::Migration
   def change
     create_table :works do |t|
       
-      t.string :name
+      t.string :title
       t.text :description
-      t.string :work
+      t.string :instrumentation
       t.timestamps null: false
     end
   end
