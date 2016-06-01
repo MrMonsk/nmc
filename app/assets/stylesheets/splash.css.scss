@@ -1,0 +1,20 @@
+// .overlay {
+//     z-index: 0;
+//     height: 100%;
+//     width: 100%;
+//     position: fixed;
+//     overflow: auto;
+//     top: 0px;
+//     left: 0px;
+//     background: rgba(0, 0, 0, 0.7); /*can be anything, of course*/
+// }
+
+.splash-container {
+    position: relative;
+    margin:auto;
+    width: 100%;
+}
+
+.splash-main {
+    background: url('splash.jpg');
+}
