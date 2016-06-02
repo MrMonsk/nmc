@@ -10,11 +10,34 @@
 // }
 
 .splash-container {
-    position: relative;
-    margin:auto;
-    width: 100%;
+  position: relative;
+  margin-top: 20%;
+  margin-bottom: 20%;
 }
 
+
 .splash-main {
-    background: url('splash.jpg');
+  background: url('splash.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100%;
+  position: relative;
+    
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
+		opacity: .4; 
+  }
+}
+
+
+.content {
+  margin: auto;
 }
