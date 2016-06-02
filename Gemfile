@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# need this to run Rails on Windows
+gem 'tzinfo-data'
 # user auth
 gem 'devise'
 # make forms ez
@@ -10,7 +12,7 @@ gem 'carrierwave'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-# us postgres for heroku
+# use postgres for heroku
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -51,4 +53,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
