@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# compile assets baby
+gem 'rails_12factor', group: :production
 # user auth
 gem 'devise'
 # make forms ez
