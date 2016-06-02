@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # need this to run Rails on Windows
 gem 'tzinfo-data'
+# compile assets baby
+gem 'rails_12factor', group: :production
 # user auth
 gem 'devise'
 # make forms ez

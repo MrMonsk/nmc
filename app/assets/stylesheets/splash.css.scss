@@ -8,13 +8,56 @@
 //     left: 0px;
 //     background: rgba(0, 0, 0, 0.7); /*can be anything, of course*/
 // }
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+
+@-ms-viewport{
+  width: device-width;
+}
 
 .splash-container {
-    position: relative;
-    margin:auto;
-    width: 100%;
+  position: relative;
+  margin-top: 15%;
+  // margin-bottom: 20%;
 }
 
-.splash-main {
-    background: url('splash.jpg');
+body {
+  background: url('splash.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+    
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
+		opacity: .4; 
+  }
 }
+
+.logo {
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
+  font-family: 'Pacifico', cursive;
+}
+
+.splash-main .motto {
+  min-height: 100px;
+}
+
+.splash-main .motto{
+  font-size: 28px;
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
+}
+
+.splash-main .subscribe {
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
+}
+
+
