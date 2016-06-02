@@ -10,20 +10,22 @@
 // }
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
 
+@-ms-viewport{
+  width: device-width;
+}
+
 .splash-container {
   position: relative;
   margin-top: 15%;
   // margin-bottom: 20%;
 }
 
-.splash-main {
+body {
   background: url('splash.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 100%;
-  position: relative;
     
   &:before {
     content: '';
