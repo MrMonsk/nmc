@@ -16,16 +16,42 @@
       <a class="nav-item nav-link" href="#">About</a>
     </div>
   </nav>
-  
-  <% if notice.present? %>
-    <p class="alert alert-info"><%= notice %></p>
+
+  <% if notice.present? || flash[:info] %>
+    <div class="alert alert-info alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <p class="text-xs-center"><%= notice || flash[:info] %></p>
+    </div>
   <% end %>
-  <% if alert.present? %>
-    <p class="alert alert-danger"><%= alert %></p>
+  <% if alert.present? || flash[:warning] %>
+    <div class="alert alert-warning alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <p class="text-xs-center"><%= alert || flash[:warning] %></p>
+    </div>
   <% end %>
-  
+  <% if flash[:success] %>
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <p class="alert alert-success"><%= flash[:success] %></p>
+    </div>
+  <% end %>
+  <% if flash[:danger] %>
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <p class="alert alert-danger"><%= flash[:danger] %></p>
+    </div>
+  <% end %>
+
   <%= yield %>
-  
+
 </div>
 
 <br class='clr' />
