@@ -8,16 +8,16 @@
 //     left: 0px;
 //     background: rgba(0, 0, 0, 0.7); /*can be anything, of course*/
 // }
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
 
 .splash-container {
   position: relative;
-  margin-top: 20%;
-  margin-bottom: 20%;
+  margin-top: 15%;
+  // margin-bottom: 20%;
 }
 
-
 .splash-main {
-  background: url('splash.jpg');
+  background: url('splash.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -37,7 +37,25 @@
   }
 }
 
-
-.content {
-  margin: auto;
+.logo {
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
+  font-family: 'Pacifico', cursive;
 }
+
+.splash-main .motto {
+  min-height: 100px;
+}
+
+.splash-main .motto{
+  font-size: 28px;
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
+}
+
+.splash-main .subscribe {
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
+}
+
+
