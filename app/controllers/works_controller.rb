@@ -5,4 +5,8 @@ class WorksController < ApplicationController
   
   def show
   end
+  
+  def new
+    @work = Work.new
+  end
 end
