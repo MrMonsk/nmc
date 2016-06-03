@@ -20,12 +20,13 @@
   // margin-bottom: 20%;
 }
 
-body {
+body .splash-main {
   background: url('splash.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  min-height: 100%;
     
   &:before {
     content: '';
