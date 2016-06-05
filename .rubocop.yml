@@ -1,0 +1,13 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - db/migrate/20160531175300_devise_create_users.rb
+    - config/application.rb
+    - config/initializers/*
+    - config/environments/*
+    - bin/spring
+
+Style/Documentation:
+  Enabled: false
