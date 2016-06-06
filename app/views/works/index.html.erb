@@ -4,6 +4,10 @@
     <h2><%= work.title %></h2>
     <p><%= work.description %></p><br />
     <i><%= work.instrumentation %></i><br />
+    
+    <% if work.user.present? %>
+      <small><%= work.user.email %></small>
+    <% end %>
   </div>
 
   <hr />

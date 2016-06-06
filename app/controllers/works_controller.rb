@@ -13,7 +13,7 @@ class WorksController < ApplicationController
   end
   
   def create
-    Work.create(work_params)
+    current_user.works.create(work_params)
     redirect_to works_path, notice: 'work created successfully.'
   end
   
