@@ -1,0 +1,14 @@
+<div class='card col-sm-6 col-sm-offset-3'>  
+  <div class='card-header'>
+    Add your new work
+  </div>
+  <div class='card-block'>
+    <%= simple_form_for @work do |f| %>
+      <%= f.input :title, placeholder: 'ex: Op. 1' %>
+      <%= f.input :description, placeholder: 'ex: no. 1' %>
+      <%= f.input :instrumentation, placeholder: 'ex: for solo piano' %>
+      <br />
+      <%= f.submit 'Add Work', class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>
