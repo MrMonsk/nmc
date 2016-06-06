@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  before_action :authenticate_user!, only: :show
+  before_action :authenticate_user!, only: [:show, :new, :create]
 
   def index
     @works = Work.all
