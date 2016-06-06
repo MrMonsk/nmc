@@ -45,15 +45,18 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Testing suite
   gem 'rspec-rails'
-  
+
   # Testing with dummy data
   gem 'factory_girl_rails'
-  
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
   # console
   gem 'byebug'
 
   gem 'rubocop', require: false
+
+  # Spring for RSpec Testing
+  gem 'spring-commands-rspec'
 end
 
 group :development do
@@ -67,4 +70,8 @@ group :development do
 
   # Need this to run Rails on Windows
   gem 'tzinfo-data'
+end
+
+group :test do
+  gem 'database_cleaner'
 end

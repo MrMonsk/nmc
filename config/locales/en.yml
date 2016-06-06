@@ -20,4 +20,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  # These beta_candidate custom errors should probably be removed once the
+  # site goes live.
+  activerecord:
+    errors:
+      models:
+        beta_candidate:
+          attributes:
+            email:
+              blank: "Oops! It looks like you forgot to enter your email address."
+              taken: "It looks like you're already signed up for the beta!"
+      messages:
+        record_invalid: "%{errors}"
+  # This error format override should probably be removed once the site
+  # goes live.
+  errors:
+    format: "%{message}"

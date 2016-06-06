@@ -2,12 +2,17 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   Exclude:
-    - db/schema.rb
-    - db/migrate/20160531175300_devise_create_users.rb
-    - config/application.rb
-    - config/initializers/*
-    - config/environments/*
     - bin/spring
+    - config/application.rb
+    - config/environments/*
+    - config/initializers/*
+    - db/migrate/20160531175300_devise_create_users.rb
+    - db/schema.rb
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+
+Metrics/LineLength:
+  Enabled: false
 
 Style/Documentation:
   Enabled: false
