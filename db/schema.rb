@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20160606054028) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "performances", force: :cascade do |t|
+    t.string   "title"
+    t.string   "image"
+    t.string   "video"
+    t.string   "audio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
