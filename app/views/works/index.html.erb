@@ -1,10 +1,13 @@
-<h1>Works</h1>
+<h1 class="text-xs-center">Works</h1>
 <% @works.each do |work| %>
-  <div>
-    <h2><%= work.title %></h2>
-    <p><%= work.description %></p><br />
-    <i><%= work.instrumentation %></i><br />
+  <div class="col-md-6 col-lg-4 col-xl-3">
+    <div class="card card-block">
+      <h3 class="card-title"><%= work.title %></h3>
+      <p class="card-text"><%= work.description %></p><br />
+      <i class="card-text"><%= work.instrumentation %></i><br />
+      <% if work.user.present? %>
+        <small><%= work.user.email %></small>
+      <% end %>
+    </div>
   </div>
-
-  <hr />
 <% end %>
