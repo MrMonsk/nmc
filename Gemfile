@@ -12,7 +12,7 @@ gem 'carrierwave'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-# us postgres for heroku
+# use postgres for heroku
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -54,6 +54,9 @@ group :development, :test do
   gem 'byebug'
 
   gem 'rubocop', require: false
+
+  # Spring for RSpec Testing
+  gem 'spring-commands-rspec'
 end
 
 group :development do
@@ -67,4 +70,8 @@ group :development do
 
   # Need this to run Rails on Windows
   gem 'tzinfo-data'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
