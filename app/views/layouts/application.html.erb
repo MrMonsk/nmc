@@ -8,12 +8,22 @@
 </head>
 <body>
 <div id="wrap">
-  <nav class="navbar navbar-light bg-faded">
+  <nav class="navbar navbar-light", style="background-color: #85A2B4">
     <div class="nav navbar-nav">
-      <a class="nav-item nav-link active" href="#">Ursatz<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="/static_pages">Ursatz<span class="sr-only">(current)</span></a>
+      <%= link_to 'Ursatz', static_pages_path, class: 'nav-item nav-link active' %>
       <a class="nav-item nav-link" href="#">Features</a>
       <a class="nav-item nav-link" href="#">Pricing</a>
       <a class="nav-item nav-link" href="#">About</a>
+      <div class="nav navbar-nav pull-xs-right">
+        <% if user_signed_in? %>
+          <%= link_to 'My Profile', user_path(current_user), class: "nav-item nav-link" %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-item nav-link" %></a>
+        <% else %>
+          <%= link_to 'Sign In', new_user_session_path, class: "nav-item nav-link" %>
+         <%= link_to 'Sign Up', new_user_registration_path, class: "nav-item nav-link" %>
+        <% end %>
+      </div>
     </div>
   </nav>
 
