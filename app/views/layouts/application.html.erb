@@ -12,10 +12,11 @@
     <div class="container">
       <div class="nav navbar-nav">
         <a class="nav-item nav-link active brand" href="/static_pages">Ursatz<span class="sr-only">(current)</span></a>
-        <%= link_to 'Ursatz', static_pages_path, class: 'nav-item nav-link active brand' %>
-        <a class="nav-item nav-link" href="#">Features</a>
-        <a class="nav-item nav-link" href="#">Pricing</a>
-        <a class="nav-item nav-link" href="#">About</a>
+        <!--<%= link_to 'Ursatz', static_pages_path, class: 'nav-item nav-link active brand' %>-->
+        <%= link_to 'Works', works_path, class: 'nav-item nav-link' %>
+        <%= link_to 'Performances', performances_path, class: 'nav-item nav-link' %>
+        <%= link_to 'About', static_pages_about_path, class: 'nav-item nav-link' %>
+        <!--<a class="nav-item nav-link" href="#">About</a>-->
         <div class="nav navbar-nav pull-xs-right">
           <% if user_signed_in? %>
             <%= link_to 'My Profile', user_path(current_user), class: "nav-item nav-link" %>
