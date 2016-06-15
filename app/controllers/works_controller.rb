@@ -24,6 +24,11 @@ class WorksController < ApplicationController
       render text: 'Work not found :/', status: :not_found
     end
   end
+  
+  def update
+    @work = Work.find_by_id(params[:id])
+    redirect_to user_path(id: current_user.id), notice: 'work updated successfully'
+  end
 
   private
 

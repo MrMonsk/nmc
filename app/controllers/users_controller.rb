@@ -4,7 +4,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @works = @user.works
     rescue ActiveRecord::RecordNotFound
-        render text: 'user not found :/', status: :not_found
+      render text: 'user not found :/', status: :not_found
     end
   end
   
