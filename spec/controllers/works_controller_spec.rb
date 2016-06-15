@@ -29,4 +29,25 @@ RSpec.describe WorksController, type: :controller do
       expect(Work.exists?).to eq(true)
     end
   end
+  
+  describe 'GET /edit' do
+    
+    it 'should show the edit page for a work if work is found' do
+      user = FactoryGirl.create(:user)
+      sign_in user
+      w = FactoryGirl.create(:work)
+      get :edit, id: w.id
+      expect(response).to have_http_status(:success)
+    end
+    
+    it 'should return error if work not found' do
+      user = FactoryGirl.create(:user)
+      sign_in user
+      get :edit, id: 'uwotm8'
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+  
+  describe 'PUT /update' do
+  end
 end
