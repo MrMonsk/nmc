@@ -6,23 +6,26 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="body-content">
 <div id="wrap">
-  <nav class="navbar navbar-light", style="background-color: #85A2B4">
-    <div class="nav navbar-nav">
-      <a class="nav-item nav-link active" href="/static_pages">Ursatz<span class="sr-only">(current)</span></a>
-      <%= link_to 'Ursatz', static_pages_path, class: 'nav-item nav-link active' %>
-      <a class="nav-item nav-link" href="#">Features</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
-      <a class="nav-item nav-link" href="#">About</a>
-      <div class="nav navbar-nav pull-xs-right">
-        <% if user_signed_in? %>
-          <%= link_to 'My Profile', user_path(current_user), class: "nav-item nav-link" %>
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-item nav-link" %></a>
-        <% else %>
-          <%= link_to 'Sign In', new_user_session_path, class: "nav-item nav-link" %>
-         <%= link_to 'Sign Up', new_user_registration_path, class: "nav-item nav-link" %>
-        <% end %>
+  <nav class="navbar navbar-light", style="background: rgba(255,255,255, 0.9)">
+    <div class="container">
+      <div class="nav navbar-nav">
+        <a class="nav-item nav-link active brand" href="/static_pages">Ursatz<span class="sr-only">(current)</span></a>
+        <!--<%= link_to 'Ursatz', static_pages_path, class: 'nav-item nav-link active brand' %>-->
+        <%= link_to 'Works', works_path, class: 'nav-item nav-link' %>
+        <%= link_to 'Performances', performances_path, class: 'nav-item nav-link' %>
+        <%= link_to 'About', static_pages_about_path, class: 'nav-item nav-link' %>
+        <!--<a class="nav-item nav-link" href="#">About</a>-->
+        <div class="nav navbar-nav pull-xs-right">
+          <% if user_signed_in? %>
+            <%= link_to 'My Profile', user_path(current_user), class: "nav-item nav-link" %>
+            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-item nav-link" %></a>
+          <% else %>
+            <%= link_to 'Sign In', new_user_session_path, class: "nav-item nav-link" %>
+           <%= link_to 'Sign Up', new_user_registration_path, class: "nav-item nav-link" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </nav>
@@ -59,7 +62,7 @@
       <p class="alert alert-danger"><%= flash[:danger] %></p>
     </div>
   <% end %>
-
+  
   <%= yield %>
 
 </div>
@@ -69,9 +72,11 @@
 </div>
 <div id="footer">
   <div class="container">
-    <b>Footer Here</b>
+    <h6 style="font-family: 'Pacifico', cursive">Ursatz</h6>
     <br />
-    <%= link_to 'Link', '#' %>
+     <%= link_to 'About', '#' %>
+     <%= link_to 'Contact', '#' %>
+     <p>&copy; Yowon Yoon 2016</p>
   </div>
 </div>
 
