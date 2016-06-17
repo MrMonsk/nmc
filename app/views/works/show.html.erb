@@ -22,7 +22,9 @@
       <i class="m-l-2"><%= @work.instrumentation %></i>      
     </div>
     <div class="row">
-      <%= link_to 'Edit Work', edit_work_path(@work), class: 'pull-xs-right btn btn-sm btn-danger-outline' %>
+      <% if current_user == @work.user %>
+        <%= link_to 'Edit Work', edit_work_path(@work), class: 'pull-xs-right btn btn-sm btn-danger-outline' %>
+      <% end %>
     </div>
   </div>
 </div>

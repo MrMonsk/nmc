@@ -7,7 +7,7 @@
         <p class="card-text"><%= simple_format(truncate(work.description, length: 60)) %></p><br />
         <i class="card-text"><%= work.instrumentation %></i><br />
         <% if work.user.present? %>
-          <small><%= work.user.email %></small>
+          <small class='bottom-text'><%= work.user.email %></small>
         <% end %>
       </div>
     </div>
