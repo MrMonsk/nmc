@@ -34,3 +34,12 @@ a {transition: .25s all;}
  &:focus,
  &:hover {@include BoxShadowHelper(2);}
 }
+
+.main-text {
+  color: #272f34 !important;
+}
+
+.bottom-text {
+  position: absolute;
+  bottom: 0;
+}

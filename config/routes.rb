@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :performances, only: [:index, :show, :new]
   resources :static_pages, only: :index
   resources :users, only: [:show, :edit, :update]
-  resources :works, only: [:index, :show, :new, :create]
+  resources :works
 end

@@ -1,13 +1,15 @@
 <h1 class="text-xs-center">Works</h1>
 <% @works.each do |work| %>
-  <div class="col-md-6 col-lg-4 col-xl-3">
-    <div class="card card-block">
-      <h3 class="card-title"><%= work.title %></h3>
-      <p class="card-text"><%= work.description %></p><br />
-      <i class="card-text"><%= work.instrumentation %></i><br />
-      <% if work.user.present? %>
-        <small><%= work.user.email %></small>
-      <% end %>
+  <%= link_to work, class: 'main-text' do %>
+    <div class="col-md-6 col-lg-4 col-xl-3">
+      <div class="card card-block" style="height: 16rem;">
+        <h3 class="card-title"><%= work.title %></h3>
+        <p class="card-text"><%= simple_format(truncate(work.description, length: 60)) %></p><br />
+        <i class="card-text"><%= work.instrumentation %></i><br />
+        <% if work.user.present? %>
+          <small class='bottom-text'><%= work.user.email %></small>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
