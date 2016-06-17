@@ -30,9 +30,17 @@ en:
             email:
               blank: "Oops! It looks like you forgot to enter your email address."
               taken: "It looks like you're already signed up for the beta!"
+        performance:
+          attributes:
+            user_id:
+              taken: "Oops! It looks like this performance already exists."
+            title:
+              blank: "Oops! It looks like you forgot to enter a title."
       messages:
         record_invalid: "%{errors}"
   # This error format override should probably be removed once the site
   # goes live.
   errors:
     format: "%{message}"
+    messages:
+      taken: "abc"
