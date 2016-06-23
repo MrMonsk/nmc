@@ -1,2 +1,15 @@
-<h1>Performances#new</h1>
-<p>Find me in app/views/performance/new.html.erb</p>
+<div class='card col-sm-6 col-sm-offset-3'>  
+  <div class='card-header'>
+    Add your new performance
+  </div>
+  <div class='card-block'>
+    <%= simple_form_for @performance do |f| %>
+      <%= f.input :title, placeholder: 'ex: Op. 1' %>
+      <%= f.input :image, placeholder: 'ex: no. 1' %>
+      <%= f.input :video, placeholder: 'ex: for solo piano' %>
+      <%= f.input :audio, placeholder: 'ex: for solo piano' %>
+      <br />
+      <%= f.submit 'Add Performance', class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

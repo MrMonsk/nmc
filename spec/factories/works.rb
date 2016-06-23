@@ -3,5 +3,6 @@ FactoryGirl.define do
     title 'Op. 1'
     description 'no. 1'
     instrumentation 'for solo piano'
+    association :user
   end
 end

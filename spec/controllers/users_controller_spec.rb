@@ -8,7 +8,7 @@ RSpec.describe UsersController, type: :controller do
       get :show, id: user.id
       expect(response).to have_http_status(:success)
     end
-    
+
     it 'should return error if user not found' do
       user = FactoryGirl.create(:user)
       sign_in user

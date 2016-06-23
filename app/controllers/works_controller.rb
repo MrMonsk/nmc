@@ -17,7 +17,7 @@ class WorksController < ApplicationController
     current_user.works.create(work_params)
     redirect_to works_path, notice: 'work created successfully.'
   end
-  
+
   def edit
     @work = Work.find_by_id(params[:id])
     if @work.blank?
@@ -26,10 +26,10 @@ class WorksController < ApplicationController
       render text: 'You are not the composer of this work!', status: :forbidden
     end
   end
-  
+
   def update
     @work = Work.find_by_id(params[:id])
-    if current_user == @work.user 
+    if current_user == @work.user
       @work.update_attributes(work_params)
       redirect_to user_path(id: current_user.id), notice: 'work updated successfully'
     else
