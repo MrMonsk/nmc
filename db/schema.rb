@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160608141943) do
   end
 
   create_table "performances", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "title"
     t.string   "image"
     t.string   "video"
@@ -30,6 +31,9 @@ ActiveRecord::Schema.define(version: 20160608141943) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "performances", ["user_id", "title"], name: "index_performances_on_user_id_and_title", unique: true, using: :btree
+  add_index "performances", ["user_id"], name: "index_performances_on_user_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.text     "bio"
@@ -67,4 +71,5 @@ ActiveRecord::Schema.define(version: 20160608141943) do
 
   add_index "works", ["user_id"], name: "index_works_on_user_id", using: :btree
 
+  add_foreign_key "performances", "users"
 end

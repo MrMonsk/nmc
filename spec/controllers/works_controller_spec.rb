@@ -20,26 +20,32 @@ RSpec.describe WorksController, type: :controller do
 
   describe 'POST /create' do
     work_params = FactoryGirl.attributes_for(:work)
-    
+
     it 'should create a new work' do
       user = FactoryGirl.create(:user)
       sign_in user
       post :create, work: work_params
-      
+
       expect(Work.exists?).to eq(true)
     end
   end
-  
+
   describe 'GET /edit' do
-    
-    it 'should show the edit page for a work if work is found' do
+    it 'should not allow non-owner to edit work' do
       user = FactoryGirl.create(:user)
       sign_in user
       w = FactoryGirl.create(:work)
       get :edit, id: w.id
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it 'should show the edit page for a work if work is found and belongs to user' do
+      w = FactoryGirl.create(:work)
+      sign_in w.user
+      get :edit, id: w.id
       expect(response).to have_http_status(:success)
     end
-    
+
     it 'should return error if work not found' do
       user = FactoryGirl.create(:user)
       sign_in user
@@ -47,7 +53,7 @@ RSpec.describe WorksController, type: :controller do
       expect(response).to have_http_status(:not_found)
     end
   end
-  
+
   describe 'PUT /update' do
   end
 end
