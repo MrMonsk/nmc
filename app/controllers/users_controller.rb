@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:following, :followers, :edit, :update, :destroy]
   def index
     @users = User.all
   end
@@ -11,5 +12,17 @@ class UsersController < ApplicationController
   end
 
   def edit
+  end
+  
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following
+    render 'show_follow'
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follow'
   end
 end

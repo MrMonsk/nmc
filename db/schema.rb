@@ -80,7 +80,9 @@ ActiveRecord::Schema.define(version: 20160617180437) do
     t.integer  "user_id"
   end
 
+  add_index "works", ["user_id", "title"], name: "index_works_on_user_id_and_title", unique: true, using: :btree
   add_index "works", ["user_id"], name: "index_works_on_user_id", using: :btree
 
   add_foreign_key "performances", "users"
+  add_foreign_key "works", "users"
 end

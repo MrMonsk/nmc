@@ -14,26 +14,26 @@ class WorksController < ApplicationController
   end
 
   def create
-    current_user.works.create(work_params)
-    redirect_to works_path, notice: 'work created successfully.'
+    work = work_params
+
+    if verify_create work
+      current_user.works.create(work)
+      redirect_to works_path, notice: 'Your work has been added successfully!'
+    end
   end
 
   def edit
     @work = Work.find_by_id(params[:id])
-    if @work.blank?
-      render text: 'Work not found :/', status: :not_found
-    elsif @work.user != current_user
-      render text: 'You are not the composer of this work!', status: :forbidden
-    end
+    verify_edit @work
   end
 
   def update
     @work = Work.find_by_id(params[:id])
-    if current_user == @work.user
-      @work.update_attributes(work_params)
-      redirect_to user_path(id: current_user.id), notice: 'work updated successfully'
-    else
-      render text: 'Oopsie', status: :forbidden
+    work = work_params
+
+    if verify_update @work, work
+      @work.update_attributes(work)
+      redirect_to work_path(id: @work.id), notice: 'Your work has been updated successfully!'
     end
   end
 
@@ -41,5 +41,41 @@ class WorksController < ApplicationController
 
   def work_params
     params.require(:work).permit(:title, :description, :instrumentation)
+  end
+
+  def verify_create(work)
+    if work[:title].blank?
+      redirect_to new_work_path, alert: 'Oops! It looks like you forgot to enter a title.'
+      return false
+    elsif Work.where(['user_id = ? and title = ?', current_user.id, work[:title]]).present?
+      redirect_to new_work_path, alert: 'Oops! It looks like this work already exists.'
+      return false
+    end
+
+    true
+  end
+
+  def verify_edit(work)
+    if work.blank?
+      redirect_to works_path, alert: 'Oops! Work not found.'
+      return false
+    elsif work.user_id != current_user.id
+      redirect_to work_path, id: work.id, alert: 'Oops! You cannot edit this work since you are not the owner.'
+      return false
+    end
+
+    true
+  end
+
+  def verify_update(old_work, new_work)
+    if new_work[:title].blank?
+      redirect_to edit_work_path, id: old_work.id, alert: 'Oops! It looks like you forgot to enter a title.'
+      return false
+    elsif old_work.user_id != current_user.id
+      redirect_to work_path, id: old_work.id, alert: 'Oops! You cannot edit this work since you are not the owner.'
+      return false
+    end
+
+    true
   end
 end
