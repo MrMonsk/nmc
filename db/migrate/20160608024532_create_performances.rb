@@ -8,7 +8,5 @@ class CreatePerformances < ActiveRecord::Migration
       t.string :audio
       t.timestamps null: false
     end
-
-    add_index :performances, [:user, :title], unique: true
   end
 end
