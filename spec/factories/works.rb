@@ -5,7 +5,7 @@ FactoryGirl.define do
     description 'no. 1'
     instrumentation 'for solo piano'
   end
-  
+
   factory :work_blank, class: Work do
     to_create { |instance| instance.save(validate: false) }
     association :user

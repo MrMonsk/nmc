@@ -15,7 +15,7 @@ class WorksController < ApplicationController
 
   def create
     work = work_params
-    
+
     if verify_create work
       current_user.works.create(work)
       redirect_to works_path, notice: 'Your work has been added successfully!'
@@ -30,7 +30,7 @@ class WorksController < ApplicationController
   def update
     @work = Work.find_by_id(params[:id])
     work = work_params
-    
+
     if verify_update @work, work
       @work.update_attributes(work)
       redirect_to work_path(id: @work.id), notice: 'Your work has been updated successfully!'
@@ -42,7 +42,7 @@ class WorksController < ApplicationController
   def work_params
     params.require(:work).permit(:title, :description, :instrumentation)
   end
-  
+
   def verify_create(work)
     if work[:title].blank?
       redirect_to new_work_path, alert: 'Oops! It looks like you forgot to enter a title.'
@@ -54,7 +54,7 @@ class WorksController < ApplicationController
 
     true
   end
-  
+
   def verify_edit(work)
     if work.blank?
       redirect_to works_path, alert: 'Oops! Work not found.'
@@ -63,10 +63,10 @@ class WorksController < ApplicationController
       redirect_to work_path, id: work.id, alert: 'Oops! You cannot edit this work since you are not the owner.'
       return false
     end
-    
+
     true
   end
-  
+
   def verify_update(old_work, new_work)
     if new_work[:title].blank?
       redirect_to edit_work_path, id: old_work.id, alert: 'Oops! It looks like you forgot to enter a title.'
@@ -75,7 +75,7 @@ class WorksController < ApplicationController
       redirect_to work_path, id: old_work.id, alert: 'Oops! You cannot edit this work since you are not the owner.'
       return false
     end
-    
+
     true
   end
 end

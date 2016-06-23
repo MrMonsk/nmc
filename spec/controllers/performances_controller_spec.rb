@@ -10,11 +10,11 @@ RSpec.describe PerformancesController, type: :controller do
     before(:each) do
       get :index
     end
-    
+
     it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
-    
+
     it 'assigns all performances to @performances' do
       expect(assigns(:performances)).to eq(Performance.all)
     end
@@ -29,7 +29,7 @@ RSpec.describe PerformancesController, type: :controller do
     it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
-    
+
     it 'assigns performance to @performance' do
       expect(assigns(:performance)).to eq(@performance)
     end
@@ -69,7 +69,7 @@ RSpec.describe PerformancesController, type: :controller do
       it 'redirects to new_performance_path' do
         expect(response).to redirect_to(new_performance_path)
       end
-      
+
       it 'displays correct flash info message' do
         expect(flash[:alert]).to eq('Oops! It looks like you forgot to enter a title.')
       end
@@ -83,7 +83,7 @@ RSpec.describe PerformancesController, type: :controller do
       it 'redirects to new_performance_path' do
         expect(response).to redirect_to(new_performance_path)
       end
-      
+
       it 'displays correct flash info message' do
         expect(flash[:alert]).to eq('Oops! It looks like this performance already exists.')
       end
