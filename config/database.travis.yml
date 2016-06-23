@@ -1,0 +1,13 @@
+default: &default
+      adapter: postgresql
+      encoding: unicode
+      pool: 5
+      host: <%= ENV['IP'] %>
+
+test:
+  <<: *default
+  database: travis_ci_test
+
+production:
+  <<: *default
+  database: ursatz_production
