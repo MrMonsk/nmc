@@ -13,12 +13,16 @@ class PerformancesController < ApplicationController
   end
 
   def create
-    current_user.performances.create!(performance_params)
-    flash[:success] = 'Your performance has been added successfully!'
-    redirect_to performances_path
-  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
-    flash[:info] = e.message
-    redirect_to new_performance_path
+    if performance_params[:title].blank?
+      redirect_to new_performance_path, alert: 'Oops! It looks like you forgot to enter a title.'
+      return
+    elsif Performance.where(["user_id = ? and title = ?", current_user.id, performance_params[:title]]).present?
+      redirect_to new_performance_path, alert: 'Oops! It looks like this performance already exists.'
+      return
+    end
+      
+    current_user.performances.create(performance_params)
+    redirect_to performances_path, notice: 'Your performance has been added successfully!'
   end
 
   private

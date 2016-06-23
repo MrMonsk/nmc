@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe PerformancesController, type: :controller do
+  before(:each) do
+    @user = create :user
+    sign_in @user
+  end
+    
   describe 'GET #index' do
     it 'returns http success' do
       get :index
@@ -10,29 +15,16 @@ RSpec.describe PerformancesController, type: :controller do
 
   describe 'GET #show' do
     before(:each) do
-      @user = create :user_valid
       @performance = create :performance_valid
-      sign_in @user
     end
       
     it 'returns http success' do
-<<<<<<< HEAD
       get :show, id: @performance.id
-=======
-      user = FactoryGirl.create(:user)
-      sign_in user
-      get :show, id: 1
->>>>>>> 4a2e11e3a2f192b66b40859a4c04c1d57047c528
       expect(response).to have_http_status(:success)
     end
   end
 
   describe 'GET #new' do
-    before(:each) do
-      @user = create :user_valid
-      sign_in @user
-    end
-    
     it 'returns http success' do
       get :new
       expect(response).to have_http_status(:success)
@@ -41,10 +33,7 @@ RSpec.describe PerformancesController, type: :controller do
 
   describe 'POST /create' do
     context 'when performance is valid' do
-      
       before(:each) do
-        @user = create :user_valid
-        sign_in @user
         post :create, performance: FactoryGirl.attributes_for(:performance_valid)
       end
 
@@ -57,19 +46,17 @@ RSpec.describe PerformancesController, type: :controller do
       end
 
       it 'displays correct flash success message' do
-        expect(flash[:success]).to eq('Your performance has been added successfully!')
+        expect(flash[:notice]).to eq('Your performance has been added successfully!')
       end
     end
 
     context 'when title is empty' do
       before(:each) do
-        @user = create :user_valid
-        sign_in @user
         post :create, performance: FactoryGirl.attributes_for(:performance_blank)
       end
 
       it 'displays correct flash info message' do
-        expect(flash[:info]).to eq('Oops! It looks like you forgot to enter a title.')
+        expect(flash[:alert]).to eq('Oops! It looks like you forgot to enter a title.')
       end
 
       it 'redirects to new_performance_path' do
@@ -79,13 +66,11 @@ RSpec.describe PerformancesController, type: :controller do
 
     context 'when performance already exists' do
       before(:each) do
-        @user = create :user_valid
-        sign_in @user
         2.times { post :create, performance: FactoryGirl.attributes_for(:performance_valid) }
       end
 
       it 'displays correct flash info message' do
-        expect(flash[:info]).to eq('Oops! It looks like this performance already exists.')
+        expect(flash[:alert]).to eq('Oops! It looks like this performance already exists.')
       end
 
       it 'redirects to new_performance_path' do

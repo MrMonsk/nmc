@@ -17,16 +17,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'support/controller_helpers'
-
 RSpec.configure do |config|
-<<<<<<< HEAD
-  config.include FactoryGirl::Syntax::Methods
-  config.include ControllerHelpers, type: :controller
-
-=======
   config.include Devise::TestHelpers, type: :controller
->>>>>>> 4a2e11e3a2f192b66b40859a4c04c1d57047c528
+  
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
