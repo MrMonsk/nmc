@@ -89,4 +89,119 @@ RSpec.describe PerformancesController, type: :controller do
       end
     end
   end
+
+  describe 'GET /edit' do
+    before(:each) do
+      @performance = create :performance_valid
+    end
+
+    context 'when user is the owner and the performance exists' do
+      before(:each) do
+        get :edit, id: @performance.id
+      end
+
+      it 'returns http success' do
+        get :new
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'when user is the owner and the performance does not exist' do
+      before(:each) do
+        get :edit, id: 'invalid'
+      end
+
+      it 'redirects to performances_path' do
+        expect(response).to redirect_to(performances_path)
+      end
+
+      it 'displays correct flash info message' do
+        expect(flash[:alert]).to eq('Oops! Performance not found.')
+      end
+    end
+
+    context 'when user is not the owner' do
+      before(:each) do
+        sign_out @user
+        user_2 = create :user
+        sign_in user_2
+        get :edit, id: @performance.id
+      end
+
+      it 'redirects to performance_path' do
+        expect(response).to redirect_to(performance_path(assigns[:performance]))
+      end
+
+      it 'displays correct flash info message' do
+        expect(flash[:alert]).to eq('Oops! You cannot edit this performance since you are not the owner.')
+      end
+    end
+  end
+
+  describe 'PATCH /update' do
+    before(:each) do
+      @performance = create :performance_valid
+      @user.performances << @performance
+    end
+
+    context 'when update is valid' do
+      before(:each) do
+        patch :update, id: @performance, performance: FactoryGirl.attributes_for(:performance_valid, title: 'New Title')
+        @performance.reload
+      end
+
+      it 'updates existing performance' do
+        expect(Performance.find_by_id(@performance.id).title).to eq('New Title')
+      end
+
+      it 'redirects to performance_path' do
+        expect(response).to redirect_to(performance_path(assigns[:performance]))
+      end
+
+      it 'displays correct flash success message' do
+        expect(flash[:notice]).to eq('Your performance has been updated successfully!')
+      end
+    end
+
+    context 'when update is invalid - blank title' do
+      before(:each) do
+        patch :update, id: @performance, performance: FactoryGirl.attributes_for(:performance_valid, title: '')
+        @performance.reload
+      end
+
+      it 'does not update existing performance' do
+        expect(Performance.find_by_id(@performance.id).title).to eq('Test Title')
+      end
+
+      it 'redirects to edit_performance_path' do
+        expect(response).to redirect_to(edit_performance_path(assigns[:performance]))
+      end
+
+      it 'displays correct flash info message' do
+        expect(flash[:alert]).to eq('Oops! It looks like you forgot to enter a title.')
+      end
+    end
+
+    context 'when update is invalid - incorrect user' do
+      before(:each) do
+        sign_out @user
+        user_2 = create :user
+        sign_in user_2
+        patch :update, id: @performance, performance: FactoryGirl.attributes_for(:performance_valid, title: 'New Title')
+        @performance.reload
+      end
+
+      it 'does not update existing performance' do
+        expect(Performance.find_by_id(@performance.id).title).to eq('Test Title')
+      end
+
+      it 'redirects to performance_path' do
+        expect(response).to redirect_to(performance_path(assigns[:performance]))
+      end
+
+      it 'displays correct flash info message' do
+        expect(flash[:alert]).to eq('Oops! You cannot edit this performance since you are not the owner.')
+      end
+    end
+  end
 end

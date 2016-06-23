@@ -1,2 +1,36 @@
-<h1>Performances#show</h1>
-<p>Find me in app/views/performance/show.html.erb</p>
+<div class="container profile-content">
+  <h1 class="text-xs-center">
+    <%= @performance.title %>    
+  </h1>
+    <% if @performance.user %>
+      <h4 class="text-xs-center">by <%= @performance.user.email %></h4>
+    <% else %>
+      <h4 class="text-xs-center">by Anonymous</h4>
+    <% end %>
+  <div class="col-xs-10 col-xs-offset-1">
+    <hr />
+    <div class="row">
+      <h3 class="pull-xs-left">Image</h3>
+    </div>
+    <div class="row">
+      <p class="m-l-2"><%= @performance.image %></p>
+    </div>
+    <div class="row">
+      <h3 class="pull-xs-left">Video</h3>
+    </div>
+    <div class="row">
+      <p class="m-l-2"><%= @performance.video %></p>      
+    </div>
+    <div class="row">
+      <h3 class="pull-xs-left">Audio</h3>
+    </div>
+    <div class="row">
+      <p class="m-l-2"><%= @performance.audio %></p>      
+    </div>
+    <div class="row">
+      <% if current_user == @performance.user %>
+        <%= link_to 'Edit Performance', edit_performance_path(@performance), class: 'pull-xs-right btn btn-sm btn-danger-outline' %>
+      <% end %>
+    </div>
+  </div>
+</div>

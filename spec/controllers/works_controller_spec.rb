@@ -165,7 +165,7 @@ RSpec.describe WorksController, type: :controller do
 
     context 'when update is invalid - blank title' do
       before(:each) do
-        patch :update, id: @work.id, work: FactoryGirl.attributes_for(:work_valid, title: '')
+        patch :update, id: @work, work: FactoryGirl.attributes_for(:work_valid, title: '')
         @work.reload
       end
 
@@ -187,7 +187,7 @@ RSpec.describe WorksController, type: :controller do
         sign_out @user
         user_2 = create :user
         sign_in user_2
-        patch :update, id: @work.id, work: FactoryGirl.attributes_for(:work_valid, title: 'New Title')
+        patch :update, id: @work, work: FactoryGirl.attributes_for(:work_valid, title: 'New Title')
         @work.reload
       end
 
