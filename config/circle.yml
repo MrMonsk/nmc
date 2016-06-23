@@ -1,0 +1,6 @@
+machine:
+  ruby:
+    version: rbx-2.3.0
+ependencies:
+  pre:
+    - gem install bundler --pre

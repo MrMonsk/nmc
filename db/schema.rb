@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160608024532) do
+=======
+ActiveRecord::Schema.define(version: 20160608141943) do
+>>>>>>> 4a2e11e3a2f192b66b40859a4c04c1d57047c528
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +36,17 @@ ActiveRecord::Schema.define(version: 20160608024532) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   add_index "performances", ["user_id", "title"], name: "index_performances_on_user_id_and_title", unique: true, using: :btree
   add_index "performances", ["user_id"], name: "index_performances_on_user_id", using: :btree
+=======
+  create_table "profiles", force: :cascade do |t|
+    t.text     "bio"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+>>>>>>> 4a2e11e3a2f192b66b40859a4c04c1d57047c528
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

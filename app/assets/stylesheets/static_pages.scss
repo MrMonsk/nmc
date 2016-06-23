@@ -1,3 +1,40 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.featurette-divider {
+    margin: 5rem 0;
+}
+
+.nmc-main {
+    background: white;
+}
+
+.threes {
+  text-align: center;
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+}
+
+.featurette {
+  margin-right: -0.9375rem;
+  margin-left: -0.9375rem;
+  display: block;
+}
+
+.jumbo {
+  background: url('jumbo.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  max-width: 100%;
+  color:white;
+}

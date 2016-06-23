@@ -16,7 +16,13 @@ RSpec.describe PerformancesController, type: :controller do
     end
       
     it 'returns http success' do
+<<<<<<< HEAD
       get :show, id: @performance.id
+=======
+      user = FactoryGirl.create(:user)
+      sign_in user
+      get :show, id: 1
+>>>>>>> 4a2e11e3a2f192b66b40859a4c04c1d57047c528
       expect(response).to have_http_status(:success)
     end
   end

@@ -1,1 +1,69 @@
-<%= "Welcome to your profile, #{current_user.email}" %>
+<div class="container profile-content">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <h2>
+        <span><%= image_tag('rp.png', size: '160', class: 'img-circle') + ' ' + @user.email %></span>
+        <button class="btn btn-success-outline pull-xs-right">Follow</button>
+        <hr />
+      </h2>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1">
+      <h3 class="text-info">
+        Bio
+        <small class="text-muted">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
+          enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+          ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+          in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
+          sint occaecat cupidatat non proident, sunt in culpa qui officia 
+          deserunt mollit anim id est laborum.
+        </small>
+        <hr />
+      </h3>
+        <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#works" role="tab">Works</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#performances" role="tab">Performances</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#more" role="tab">More...</a>
+      </li>
+    </ul>
+    
+    <!-- Tab panes -->
+    <div class="tab-content" style="padding-bottom: 20px">
+      <div class="tab-pane fade in active" id="works" role="tabpanel">
+        <h1 class="text-xs-center">Works</h1>
+        <% @works.each do |work| %>
+          <%= link_to work, class: 'main-text' do %>
+            <div class="col-md-6 col-lg-4 col-xl-3">
+              <div class="card card-block" style="height: 16rem;">
+                <h3 class="card-title"><%= work.title %></h3>
+                <p class="card-text"><%= simple_format(truncate(work.description, length: 60)) %></p><br />
+                <i class="bottom-text card-text"><%= work.instrumentation %></i><br />
+                <!--<% if work.user.present? %>-->
+                <!--  <small><%= work.user.email %></small>-->
+                <!--<% end %>-->
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% if current_user == @user %>
+          <%= link_to 'Add a new work', new_work_path, class: 'btn btn-sm btn-primary-outline' %>
+        <% end %>
+      </div>
+      <div class="tab-pane fade" id="performances" role="tabpanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
+          enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+          ut aliquip ex ea commodo consequat.</div>
+      <div class="tab-pane fade" id="more" role="tabpanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
+          enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+          ut aliquip ex ea commodo consequat.</div>
+    </div>
+  </div>
+</div>
