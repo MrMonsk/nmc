@@ -6,6 +6,7 @@ class PerformancesController < ApplicationController
   end
 
   def show
+    @performance = Performance.find_by_id(params[:id])
   end
 
   def new
@@ -15,7 +16,7 @@ class PerformancesController < ApplicationController
   def create
     performance = performance_params
 
-    if verify_params performance
+    if verify_create performance
       current_user.performances.create(performance)
       redirect_to performances_path, notice: 'Your performance has been added successfully!'
     end
@@ -27,7 +28,7 @@ class PerformancesController < ApplicationController
     params.require(:performance).permit(:title, :image, :video, :audio)
   end
 
-  def verify_params(performance)
+  def verify_create(performance)
     if performance[:title].blank?
       redirect_to new_performance_path, alert: 'Oops! It looks like you forgot to enter a title.'
       return false
