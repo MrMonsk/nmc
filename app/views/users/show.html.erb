@@ -53,7 +53,9 @@
           <% end %>
         <% end %>
         <% if current_user == @user %>
-          <%= link_to 'Add a new work', new_work_path, class: 'btn btn-sm btn-primary-outline' %>
+          <div class="col-md-6 col-lg-4 col-xl-3" style="padding-bottom: 20px">
+            <%= link_to 'Add a new work', new_work_path, class: 'btn btn-sm btn-primary-outline' %>
+          </div>
         <% end %>
       </div>
       <div class="tab-pane fade" id="performances" role="tabpanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
