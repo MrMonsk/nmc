@@ -58,10 +58,29 @@
           </div>
         <% end %>
       </div>
-      <div class="tab-pane fade" id="performances" role="tabpanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-          ut aliquip ex ea commodo consequat.</div>
+      <div class="tab-pane fade" id="performances" role="tabpanel">
+        <h1 class="text-xs-center">Performances</h1>
+        <% @performances.each do |performance| %>
+          <%= link_to performance, class: 'main-text' do %>
+            <div class="col-md-6 col-lg-4 col-xl-3">
+              <div class="card card-block" style="height: 16rem;">
+                <h3 class="card-title"><%= performance.title %></h3>
+                <i class="card-text"><%= performance.image %></i><br />
+                <i class="card-text"><%= performance.video %></i><br />
+                <i class="card-text"><%= performance.audio %></i><br />
+                <!--<% if performance.user.present? %>-->
+                <!--  <small><%= performance.user.email %></small>-->
+                <!--<% end %>-->
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% if current_user == @user %>
+          <div class='col-md-6 col-lg-4 col-xl-3' style="padding-bottom: 20px">
+            <%= link_to 'Add a new performance', new_performance_path, class: 'btn btn-sm btn-primary-outline' %>
+          </div>
+        <% end %>
+      </div>
       <div class="tab-pane fade" id="more" role="tabpanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
           enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
