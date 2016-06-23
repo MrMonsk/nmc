@@ -1,11 +1,16 @@
 <h1 class="text-xs-center">Performances</h1>
 <% @performances.each do |performance| %>
-  <div class="col-md-6 col-lg-4 col-xl-3">
-    <div class="card card-block">
-      <h3 class="card-title"><%= performance.title %></h3>
-      <% if performance.user.present? %>
-        <small><%= performance.user.email %></small>
-      <% end %>
+  <%= link_to performance, class: 'main-text' do %>
+    <div class="col-md-6 col-lg-4 col-xl-3">
+      <div class="card card-block" style="height: 16rem;">
+        <h3 class="card-title"><%= performance.title %></h3>
+        <i class="card-text"><%= performance.image %></i><br />
+        <i class="card-text"><%= performance.video %></i><br />
+        <i class="card-text"><%= performance.audio %></i><br />
+        <% if performance.user.present? %>
+          <small class='bottom-text'><%= performance.user.email %></small>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

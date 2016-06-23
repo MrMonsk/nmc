@@ -1,0 +1,15 @@
+<div class='card col-sm-6 col-sm-offset-3'>  
+  <div class='card-header'>
+    Edit your performance
+  </div>
+  <div class='card-block'>
+    <%= simple_form_for @performance do |f| %>
+      <%= f.input :title %>
+      <%= f.input :image %>
+      <%= f.input :video %>
+      <%= f.input :audio %>
+      <br />
+      <%= f.submit 'Update Performance', class: 'btn btn-success-outline' %>
+    <% end %>
+  </div>
+</div>
