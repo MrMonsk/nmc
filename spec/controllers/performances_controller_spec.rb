@@ -5,7 +5,7 @@ RSpec.describe PerformancesController, type: :controller do
     @user = create :user
     sign_in @user
   end
-    
+
   describe 'GET #index' do
     it 'returns http success' do
       get :index
@@ -17,7 +17,7 @@ RSpec.describe PerformancesController, type: :controller do
     before(:each) do
       @performance = create :performance_valid
     end
-      
+
     it 'returns http success' do
       get :show, id: @performance.id
       expect(response).to have_http_status(:success)

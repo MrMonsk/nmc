@@ -8,7 +8,7 @@ FactoryGirl.define do
   end
 
   factory :performance_blank, class: Performance do
-    to_create {|instance| instance.save(validate: false) }
+    to_create { |instance| instance.save(validate: false) }
     association :user_id, factory: :user, strategy: :build
     title ''
     image 'Nothing Yet'

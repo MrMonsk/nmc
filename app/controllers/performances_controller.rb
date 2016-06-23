@@ -13,21 +13,29 @@ class PerformancesController < ApplicationController
   end
 
   def create
-    if performance_params[:title].blank?
-      redirect_to new_performance_path, alert: 'Oops! It looks like you forgot to enter a title.'
-      return
-    elsif Performance.where(["user_id = ? and title = ?", current_user.id, performance_params[:title]]).present?
-      redirect_to new_performance_path, alert: 'Oops! It looks like this performance already exists.'
-      return
+    performance = performance_params
+
+    if verify_params performance
+      current_user.performances.create(performance)
+      redirect_to performances_path, notice: 'Your performance has been added successfully!'
     end
-      
-    current_user.performances.create(performance_params)
-    redirect_to performances_path, notice: 'Your performance has been added successfully!'
   end
 
   private
 
   def performance_params
     params.require(:performance).permit(:title, :image, :video, :audio)
+  end
+
+  def verify_params(performance)
+    if performance[:title].blank?
+      redirect_to new_performance_path, alert: 'Oops! It looks like you forgot to enter a title.'
+      return false
+    elsif Performance.where(['user_id = ? and title = ?', current_user.id, performance[:title]]).present?
+      redirect_to new_performance_path, alert: 'Oops! It looks like this performance already exists.'
+      return false
+    end
+
+    true
   end
 end
