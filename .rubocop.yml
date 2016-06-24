@@ -1,15 +1,15 @@
 AllCops:
   Exclude:
-    - bin/spring
-    - config/application.rb
-    - config/environments/*
-    - config/initializers/*
-    - db/migrate/20160531175300_devise_create_users.rb
-    - db/schema.rb
-    - spec/rails_helper.rb
-    - spec/spec_helper.rb
+    - 'bin/spring'
+    - 'config/application.rb'
+    - 'config/environments/*'
+    - 'config/initializers/*'
+    - 'db/migrate/20160531175300_devise_create_users.rb'
+    - 'db/schema.rb'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
     # Exclude vendor dir for Travis
-    - vendor/bundle/**
+    - 'vendor/**/*'
 
 Metrics/LineLength:
   Enabled: false
