@@ -33,7 +33,7 @@ class WorksController < ApplicationController
 
     if verify_update @work, work
       @work.update_attributes(work)
-      redirect_to work_path(id: @work.id), notice: 'Your work has been updated successfully!'
+      redirect_to work_path(@work), notice: 'Your work has been updated successfully!'
     end
   end
 
@@ -51,7 +51,6 @@ class WorksController < ApplicationController
       redirect_to new_work_path, alert: 'Oops! It looks like this work already exists.'
       return false
     end
-
     true
   end
 
@@ -63,7 +62,6 @@ class WorksController < ApplicationController
       redirect_to work_path, id: work.id, alert: 'Oops! You cannot edit this work since you are not the owner.'
       return false
     end
-
     true
   end
 
@@ -75,7 +73,6 @@ class WorksController < ApplicationController
       redirect_to work_path, id: old_work.id, alert: 'Oops! You cannot edit this work since you are not the owner.'
       return false
     end
-
     true
   end
 end
