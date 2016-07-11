@@ -129,7 +129,7 @@ RSpec.describe WorksController, type: :controller do
       end
 
       it 'redirects to work_path' do
-        expect(response).to redirect_to(work_path(assigns[:work]))
+        expect(response).to redirect_to(work_path)
       end
 
       it 'displays correct flash info message' do

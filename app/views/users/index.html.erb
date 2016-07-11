@@ -1,0 +1,12 @@
+<h1 class="text-xs-center">Users</h1>
+<% @users.each do |user| %>
+  <%= link_to user, class: 'main-text' do %>
+    <div class="col-md-6 col-lg-4 col-xl-3">
+      <div class="card card-block" style="height: 16rem;">
+        <h3 class="card-title"><%= user.email %></h3>
+        <p class="card-text"><%= 'last active: ' + (user.last_sign_in_at.strftime("%b %d, %Y")) %></p><br />
+        <i class="card-text bottom-text"><%= 'member since ' + (user.created_at.strftime("%b %Y")) %></i><br />
+      </div>
+    </div>
+  <% end %>
+<% end %>
