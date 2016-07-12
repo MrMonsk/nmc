@@ -204,20 +204,20 @@ RSpec.describe WorksController, type: :controller do
       end
     end
   end
-  
+
   describe 'DELETE /destroy' do
     before(:each) do
       @work = create :work_valid
       @user.works << @work
     end
-    
+
     it 'should only allow owner of work to destroy' do
       w = FactoryGirl.create(:work_other)
       delete :destroy, id: w.id
       expect(flash[:alert]).to eq('You do not have permission to delete this work')
       expect(response).to redirect_to work_path(w)
     end
-    
+
     it 'should allow a user to destroy a work' do
       w = @work
       delete :destroy, id: w.id
@@ -225,7 +225,7 @@ RSpec.describe WorksController, type: :controller do
       w = Work.find_by_id(w.id)
       expect(w).to eq nil
     end
-    
+
     it 'should return error if work does not exist' do
       delete :destroy, id: 'uwotm8'
       expect(response).to redirect_to(works_path)

@@ -36,7 +36,7 @@ class WorksController < ApplicationController
       redirect_to work_path(@work), notice: 'Your work has been updated successfully!'
     end
   end
-  
+
   def destroy
     @work = Work.find_by_id(params[:id])
     return redirect_to works_path if @work.blank?
