@@ -1,5 +1,5 @@
 class PerformancesController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:show, :new, :create, :edit, :update, :destroy]
 
   def index
     @performances = Performance.all
@@ -34,6 +34,17 @@ class PerformancesController < ApplicationController
     if verify_update @performance, performance
       @performance.update_attributes(performance)
       redirect_to performance_path(id: @performance.id), notice: 'Your performance has been updated successfully!'
+    end
+  end
+
+  def destroy
+    @performance = Performance.find_by_id(params[:id])
+    return redirect_to performances_path if @performance.blank?
+    if @performance.user == current_user
+      @performance.destroy
+      redirect_to performances_path, notice: "Your performance, #{@performance.title}, has been deleted successfully"
+    else
+      redirect_to performance_path(@performance), alert: 'You do not have permission to delete this performance'
     end
   end
 

@@ -42,7 +42,7 @@ class WorksController < ApplicationController
     return redirect_to works_path if @work.blank?
     if @work.user == current_user
       @work.destroy
-      redirect_to works_path, notice: "#{@work.title} has been deleted successfully"
+      redirect_to works_path, notice: "Your work, #{@work.title}, has been deleted successfully"
     else
       redirect_to work_path(@work), alert: 'You do not have permission to delete this work'
     end
