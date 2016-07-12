@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:show, :new, :create, :edit, :update, :destroy]
 
   def index
     @works = Work.all
@@ -34,6 +34,17 @@ class WorksController < ApplicationController
     if verify_update @work, work
       @work.update_attributes(work)
       redirect_to work_path(@work), notice: 'Your work has been updated successfully!'
+    end
+  end
+  
+  def destroy
+    @work = Work.find_by_id(params[:id])
+    return redirect_to works_path if @work.blank?
+    if @work.user == current_user
+      @work.destroy
+      redirect_to works_path, notice: "#{@work.title} has been deleted successfully"
+    else
+      redirect_to work_path(@work), alert: 'You do not have permission to delete this work'
     end
   end
 
