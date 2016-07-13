@@ -13,4 +13,10 @@ FactoryGirl.define do
     description 'no. 1'
     instrumentation 'for solo piano'
   end
+
+  factory :work_other, class: Work do
+    title 'title'
+    description 'description'
+    instrumentation 'instrumentation'
+  end
 end

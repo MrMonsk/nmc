@@ -204,4 +204,31 @@ RSpec.describe PerformancesController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE /destroy' do
+    before(:each) do
+      @performance = create :performance_valid
+      @user.performances << @performance
+    end
+
+    it 'should only allow owner of work to destroy' do
+      p = FactoryGirl.create(:performance_other)
+      delete :destroy, id: p.id
+      expect(flash[:alert]).to eq('You do not have permission to delete this performance as you are not the owner')
+      expect(response).to redirect_to performance_path(p)
+    end
+
+    it 'should allow a user to destroy a performance' do
+      p = @performance
+      delete :destroy, id: p.id
+      expect(response).to redirect_to(performances_path)
+      p = Performance.find_by_id(p.id)
+      expect(p).to eq nil
+    end
+
+    it 'should return error if performance does not exist' do
+      delete :destroy, id: 'uwotm8'
+      expect(response).to redirect_to(performances_path)
+    end
+  end
 end

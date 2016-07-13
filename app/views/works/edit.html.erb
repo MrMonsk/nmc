@@ -11,4 +11,5 @@
       <%= f.submit 'Update Work', class: 'btn btn-success-outline' %>
     <% end %>
   </div>
+    <%= link_to 'Destroy your work forever', work_path(@work), method: :delete, data: {confirm: 'You sure m8?'} %>
 </div>

@@ -15,4 +15,11 @@ FactoryGirl.define do
     video 'Nothing Yet'
     audio 'Nothing Yet'
   end
+
+  factory :performance_other, class: Performance do
+    title 'Performerless'
+    image 'n/a'
+    video 'n/a'
+    audio 'n/a'
+  end
 end

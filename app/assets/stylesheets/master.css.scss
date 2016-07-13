@@ -27,7 +27,7 @@
  }
 }
 a {transition: .25s all;}
-.card {
+.card-float {
  overflow: hidden;
  @include BoxShadowHelper(1);
  transition: .25s box-shadow;
