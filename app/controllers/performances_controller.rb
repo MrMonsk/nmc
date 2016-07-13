@@ -48,49 +48,39 @@ class PerformancesController < ApplicationController
 
   private
 
-  def owner?(performance)
-    message = 'You do not have permission to delete this performance as you are not the owner'
-    return redirect_to performance_path(performance), alert: message if performance.user != current_user
-    false
-  end
-
   def performance_params
     params.require(:performance).permit(:title, :image, :video, :audio)
   end
 
-  def verify_create(performance)
-    if performance[:title].blank?
-      redirect_to new_performance_path, alert: 'Oops! It looks like you forgot to enter a title.'
-      return false
-    elsif Performance.where(['user_id = ? and title = ?', current_user.id, performance[:title]]).present?
-      redirect_to new_performance_path, alert: 'Oops! It looks like this performance already exists.'
-      return false
-    end
+  def owner?(performance)
+    message = 'You are not the owner of this performance.'
+    return true if performance.user_id == current_user.id
+    redirect_to performance_path(performance), alert: message
+    false
+  end
 
-    true
+  def verify_create(performance)
+    title_exists?(old_performance, new_performance)
+    found_performance = Performance.where(user_id: current_user.id, title: performance.title)
+    return true if found_performance.present?
+    redirect_to new_performance_path, alert: 'Oops! It looks like this performance already exists.'
+    false
   end
 
   def verify_edit(performance)
-    if performance.blank?
-      redirect_to performances_path, alert: 'Oops! Performance not found.'
-      return false
-    elsif performance.user_id != current_user.id
-      redirect_to performance_path, id: performance.id, alert: 'Oops! You cannot edit this performance since you are not the owner.'
-      return false
-    end
-
-    true
+    redirect_to performances_path, alert: 'Oops! Performance not found.' if performance.blank?
+    return true if owner?(performance)
+    false
   end
 
   def verify_update(old_performance, new_performance)
-    if new_performance[:title].blank?
-      redirect_to edit_performance_path, id: old_performance.id, alert: 'Oops! It looks like you forgot to enter a title.'
-      return false
-    elsif old_performance.user_id != current_user.id
-      redirect_to performance_path, id: old_performance.id, alert: 'Oops! You cannot edit this performance since you are not the owner.'
-      return false
-    end
+    title_exists?(old_performance, new_performance)
+    return true if owner?(old_performance)
+    false
+  end
 
-    true
+  def title_exists?(old_performance, new_performance)
+    message = 'Oops! It looks like you forgot to enter a title.'
+    redirect_to edit_performance_path, id: old_performance.id, alert: message if new_performance[:title].blank?
   end
 end
