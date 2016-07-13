@@ -97,11 +97,15 @@
         1,
         1,
         null,
+        null,
+        null,
         1,
         null,
-        null,
-        null,
         1,
+        2,
+        2,
+        1,
+        null,
         null,
         1,
         18,
@@ -222,11 +226,21 @@
         1,
         1,
         null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         1,
         null,
-        null,
-        null,
         1,
+        2,
+        2,
+        1,
+        null,
         null,
         1,
         18,
@@ -329,16 +343,6 @@
         0,
         0
       ],
-      "/home/ubuntu/workspace/app/models/work.rb": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
       "/home/ubuntu/workspace/app/models/performance.rb": [
         0,
         0,
@@ -356,8 +360,18 @@
         0,
         0,
         0
+      ],
+      "/home/ubuntu/workspace/app/models/work.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ]
     },
-    "timestamp": 1468348357
+    "timestamp": 1468442837
   }
 }

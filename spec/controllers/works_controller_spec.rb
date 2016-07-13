@@ -214,7 +214,7 @@ RSpec.describe WorksController, type: :controller do
     it 'should only allow owner of work to destroy' do
       w = FactoryGirl.create(:work_other)
       delete :destroy, id: w.id
-      expect(flash[:alert]).to eq('You do not have permission to delete this work')
+      expect(flash[:alert]).to eq('You do not have permission to delete this work as you are not the owner')
       expect(response).to redirect_to work_path(w)
     end
 

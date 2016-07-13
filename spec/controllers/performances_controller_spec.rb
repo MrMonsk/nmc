@@ -214,7 +214,7 @@ RSpec.describe PerformancesController, type: :controller do
     it 'should only allow owner of work to destroy' do
       p = FactoryGirl.create(:performance_other)
       delete :destroy, id: p.id
-      expect(flash[:alert]).to eq('You do not have permission to delete this performance')
+      expect(flash[:alert]).to eq('You do not have permission to delete this performance as you are not the owner')
       expect(response).to redirect_to performance_path(p)
     end
 

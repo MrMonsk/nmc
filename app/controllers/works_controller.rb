@@ -40,15 +40,25 @@ class WorksController < ApplicationController
   def destroy
     @work = Work.find_by_id(params[:id])
     return redirect_to works_path if @work.blank?
-    if @work.user == current_user
+    if not_owner(@work) == false
       @work.destroy
       redirect_to works_path, notice: "Your work, #{@work.title}, has been deleted successfully"
-    else
-      redirect_to work_path(@work), alert: 'You do not have permission to delete this work'
     end
+    # if @work.user == current_user
+    #   @work.destroy
+    #   redirect_to works_path, notice: "Your work, #{@work.title}, has been deleted successfully"
+    # else
+    #   redirect_to work_path(@work), alert: 'You do not have permission to delete this work'
+    # end
   end
 
   private
+
+  def not_owner(work)
+    message = 'You do not have permission to delete this work as you are not the owner'
+    return redirect_to work_path(work), alert: message if work.user != current_user
+    false
+  end
 
   def work_params
     params.require(:work).permit(:title, :description, :instrumentation)
