@@ -40,7 +40,7 @@ class PerformancesController < ApplicationController
   def destroy
     @performance = Performance.find_by_id(params[:id])
     return redirect_to performances_path if @performance.blank?
-    if not_owner(@performance) == false
+    if owner?(@performance) == false
       @performance.destroy
       redirect_to performances_path, notice: "Your performance, #{@performance.title}, has been deleted successfully"
     end
@@ -48,7 +48,7 @@ class PerformancesController < ApplicationController
 
   private
 
-  def not_owner(performance)
+  def owner?(performance)
     message = 'You do not have permission to delete this performance as you are not the owner'
     return redirect_to performance_path(performance), alert: message if performance.user != current_user
     false
