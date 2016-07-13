@@ -2,7 +2,7 @@
 <% @performances.each do |performance| %>
   <%= link_to performance, class: 'main-text' do %>
     <div class="col-md-6 col-lg-4 col-xl-3">
-      <div class="card card-block" style="height: 16rem;">
+      <div class="card card-float card-block" style="height: 16rem;">
         <h3 class="card-title"><%= performance.title %></h3>
         <i class="card-text"><%= performance.image %></i><br />
         <i class="card-text"><%= performance.video %></i><br />
