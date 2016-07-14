@@ -23,30 +23,34 @@ class WorksController < ApplicationController
   end
 
   def edit
-    @work = Work.find_by_id(params[:id])
+    @work = found_work
     verify_edit @work
   end
 
   def update
-    @work = Work.find_by_id(params[:id])
-    work = work_params
+    @work = found_work
+    new_work = work_params
 
-    if verify_update @work, work
-      @work.update_attributes(work)
+    if verify_update(@work, new_work)
+      @work.update_attributes(new_work)
       redirect_to work_path(@work), notice: 'Your work has been updated successfully!'
     end
   end
 
   def destroy
-    @work = Work.find_by_id(params[:id])
+    @work = found_work
     return redirect_to works_path if @work.blank?
-    if owner?(@work) == false
+    if owner?(@work)
       @work.destroy
       redirect_to works_path, notice: "Your work, #{@work.title}, has been deleted successfully"
     end
   end
 
   private
+
+  def found_work
+    Work.find_by_id(params[:id])
+  end
 
   def work_params
     params.require(:work).permit(:title, :description, :instrumentation)
@@ -60,11 +64,14 @@ class WorksController < ApplicationController
   end
 
   def verify_create(work)
-    title_exists?(old_work, new_work)
-    found_work = Work.where(user_id: current_user.id, title: work.title)
-    return true if found_work.present?
-    redirect_to new_work_path, alert: 'Oops! It looks like this work already exists.'
-    false
+    if title_blank?(work)
+      redirect_to new_work_path, alert: 'Oops! It looks like you forgot to enter a title.'
+      return false
+    elsif Work.where(['user_id = ? and title = ?', current_user.id, work[:title]]).present?
+      redirect_to new_work_path, alert: 'Oops! It looks like this work already exists.'
+      false
+    end
+    true
   end
 
   def verify_edit(work)
@@ -74,13 +81,16 @@ class WorksController < ApplicationController
   end
 
   def verify_update(old_work, new_work)
-    title_exists?(old_work, new_work)
+    if title_blank?(new_work)
+      redirect_to works_path, id: old_work.id, alert: 'Oops! It looks like you forgot to enter a title.'
+      return false
+    end
     return true if owner?(old_work)
     false
   end
 
-  def title_exists?(old_work, new_work)
-    message = 'Oops! It looks like you forgot to enter a title.'
-    redirect_to edit_work_path, id: old_work.id, alert: message if new_work[:title].blank?
+  def title_blank?(work)
+    return true if work[:title].blank?
+    false
   end
 end

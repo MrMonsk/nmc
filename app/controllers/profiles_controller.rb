@@ -23,7 +23,7 @@ class ProfilesController < ApplicationController
   end
 
   def owner?(profile)
-    message = 'Oops! You cannot edit this profile since you are not the owner.'
+    message = 'You are not the owner of this performance.'
     return true if profile.user_id == current_user.id
     redirect_to profile_path(profile), alert: message
     false
