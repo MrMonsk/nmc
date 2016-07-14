@@ -57,7 +57,7 @@ class PerformancesController < ApplicationController
 
   def owner?(performance)
     message = 'You are not the owner of this performance.'
-    return true if performance.user == current_user
+    return true if performance.user_id == current_user.id
     redirect_to performance_path(performance), alert: message
     false
   end
