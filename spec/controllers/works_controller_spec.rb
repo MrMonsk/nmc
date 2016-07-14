@@ -129,7 +129,7 @@ RSpec.describe WorksController, type: :controller do
       end
 
       it 'redirects to work_path' do
-        expect(response).to redirect_to(work_path)
+        expect(response).to redirect_to(work_path(assigns[:work]))
       end
 
       it 'displays correct flash info message' do
@@ -200,7 +200,7 @@ RSpec.describe WorksController, type: :controller do
       end
 
       it 'displays correct flash info message' do
-        expect(flash[:alert]).to eq('You are not the owner of this work.')
+        expect(flash[:alert]).to eq('Oops! You cannot edit this work since you are not the owner.')
       end
     end
   end
@@ -214,7 +214,7 @@ RSpec.describe WorksController, type: :controller do
     it 'should only allow owner of work to destroy' do
       w = FactoryGirl.create(:work_other)
       delete :destroy, id: w.id
-      expect(flash[:alert]).to eq('You are not the owner of this work.')
+      expect(flash[:alert]).to eq('You do not have permission to delete this work as you are not the owner')
       expect(response).to redirect_to work_path(w)
     end
 

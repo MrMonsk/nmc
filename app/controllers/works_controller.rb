@@ -40,7 +40,7 @@ class WorksController < ApplicationController
   def destroy
     @work = found_work
     return redirect_to works_path if @work.blank?
-    if owner?(@work)
+    if owner?(@work, 'You do not have permission to delete this work as you are not the owner')
       @work.destroy
       redirect_to works_path, notice: "Your work, #{@work.title}, has been deleted successfully"
     end
@@ -56,9 +56,8 @@ class WorksController < ApplicationController
     params.require(:work).permit(:title, :description, :instrumentation)
   end
 
-  def owner?(work)
-    message = 'You are not the owner of this work.'
-    return true if work.user_id == current_user.id
+  def owner?(work, message = 'You are not the owner of this work.')
+    return true if work.user == current_user
     redirect_to work_path(work), alert: message
     false
   end
@@ -69,28 +68,27 @@ class WorksController < ApplicationController
       return false
     elsif Work.where(['user_id = ? and title = ?', current_user.id, work[:title]]).present?
       redirect_to new_work_path, alert: 'Oops! It looks like this work already exists.'
-      false
+      return false
     end
     true
   end
 
   def verify_edit(work)
-    redirect_to works_path, alert: 'Oops! Performance not found.' if work.blank?
-    return true if owner?(work)
+    redirect_to works_path, alert: 'Oops! Work not found.' if work.blank?
+    return true if work && owner?(work, 'Oops! You cannot edit this work since you are not the owner.')
     false
   end
 
   def verify_update(old_work, new_work)
     if title_blank?(new_work)
-      redirect_to works_path, id: old_work.id, alert: 'Oops! It looks like you forgot to enter a title.'
+      redirect_to edit_work_path, id: old_work.id, alert: 'Oops! It looks like you forgot to enter a title.'
       return false
     end
-    return true if owner?(old_work)
+    return true if owner?(old_work, 'Oops! You cannot edit this work since you are not the owner.')
     false
   end
 
   def title_blank?(work)
-    return true if work[:title].blank?
-    false
+    work[:title].blank? ? true : false
   end
 end

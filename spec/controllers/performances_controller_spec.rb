@@ -133,7 +133,7 @@ RSpec.describe PerformancesController, type: :controller do
       end
 
       it 'displays correct flash info message' do
-        expect(flash[:alert]).to eq('You are not the owner of this performance.')
+        expect(flash[:alert]).to eq('Oops! You cannot edit this performance since you are not the owner.')
       end
     end
   end

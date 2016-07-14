@@ -55,9 +55,8 @@ class PerformancesController < ApplicationController
     params.require(:performance).permit(:title, :image, :video, :audio)
   end
 
-  def owner?(performance)
-    message = 'You are not the owner of this performance.'
-    return true if performance.user_id == current_user.id
+  def owner?(performance, message = 'You are not the owner of this performance.')
+    return true if performance.user == current_user
     redirect_to performance_path(performance), alert: message
     false
   end
@@ -75,7 +74,7 @@ class PerformancesController < ApplicationController
 
   def verify_edit(performance)
     redirect_to performances_path, alert: 'Oops! Performance not found.' if performance.blank?
-    return true if owner?(performance)
+    return true if performance && owner?(performance, 'Oops! You cannot edit this performance since you are not the owner.')
     false
   end
 
@@ -89,7 +88,6 @@ class PerformancesController < ApplicationController
   end
 
   def title_blank?(performance)
-    return true if performance[:title].blank?
-    false
+    performance[:title].blank? ? true : false
   end
 end
