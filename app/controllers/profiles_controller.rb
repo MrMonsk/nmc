@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-    before_action :authenticate_user!, only: [:create, :edit, :update]
+  before_action :authenticate_user!, only: [:create, :edit, :update]
 
   def create
   end
