@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :profile do
     factory :profile_valid, class: Profile do
       association :user
-      bio 'Test Title'
+      bio 'New Bio'
       url 'Nothing Yet'
       stage_name 'Nothing Yet'
       image 'Nothing Yet'

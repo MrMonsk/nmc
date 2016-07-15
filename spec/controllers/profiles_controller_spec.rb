@@ -119,7 +119,7 @@ RSpec.describe ProfilesController, type: :controller do
       end
 
       it 'displays correct flash info message' do
-        expect(flash[:alert]).to eq('You are not the owner of this performance.')
+        expect(flash[:alert]).to eq('You are not the owner of this profile.')
       end
     end
   end
@@ -127,7 +127,7 @@ RSpec.describe ProfilesController, type: :controller do
   describe 'PATCH /update' do
     before(:each) do
       @profile = create :profile_valid
-      @user.profile << @profile
+      # @user.profile << @profile
     end
 
     context 'when update is valid' do
@@ -137,7 +137,7 @@ RSpec.describe ProfilesController, type: :controller do
       end
 
       it 'updates existing profile' do
-        expect(Performance.find_by_id(@profile.id).bio).to eq('New Bio')
+        expect(Profile.find_by_id(@profile.id).bio).to eq('New Bio')
       end
 
       it 'redirects to profile_path' do
@@ -156,7 +156,7 @@ RSpec.describe ProfilesController, type: :controller do
       end
 
       it 'does not update existing profile' do
-        expect(Performance.find_by_id(@profile.id).bio).to eq('Test Title')
+        expect(Profile.find_by_id(@profile.id).bio).to eq('New Bio')
       end
 
       it 'redirects to edit_profile_path' do
@@ -178,7 +178,7 @@ RSpec.describe ProfilesController, type: :controller do
       end
 
       it 'does not update existing profile' do
-        expect(Performance.find_by_id(@profile.id).bio).to eq('New Bio')
+        expect(Profile.find_by_id(@profile.id).bio).to eq('New Bio')
       end
 
       it 'redirects to profile_path' do

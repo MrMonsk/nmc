@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
     params.require(:profile).permit(:bio, :url, :stage_name, :image)
   end
 
-  def owner?(profile, message = 'You are not the owner of this performance.')
+  def owner?(profile, message = 'You are not the owner of this profile.')
     return true if profile.user_id == current_user.id
     redirect_to profile_path(profile), alert: message
     false
