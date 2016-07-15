@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
   resources :works
   resources :performances
+  resources :profiles
 end

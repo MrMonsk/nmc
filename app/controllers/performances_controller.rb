@@ -14,33 +14,32 @@ class PerformancesController < ApplicationController
   end
 
   def create
-    performance = performance_params
-
-    if verify_create performance
-      current_user.performances.create(performance)
+    @performance_params = performance_params
+    if verify_create(@performance_params)
+      current_user.performances.create(@performance_params)
       redirect_to performances_path, notice: 'Your performance has been added successfully!'
     end
   end
 
   def edit
-    @performance = Performance.find_by_id(params[:id])
+    @performance = found_performance
     verify_edit @performance
   end
 
   def update
-    @performance = Performance.find_by_id(params[:id])
-    performance = performance_params
+    @performance = found_performance
+    new_performance = performance_params
 
-    if verify_update @performance, performance
-      @performance.update_attributes(performance)
+    if verify_update @performance, new_performance
+      @performance.update_attributes(new_performance)
       redirect_to performance_path(id: @performance.id), notice: 'Your performance has been updated successfully!'
     end
   end
 
   def destroy
-    @performance = Performance.find_by_id(params[:id])
+    @performance = found_performance
     return redirect_to performances_path if @performance.blank?
-    if not_owner(@performance) == false
+    if owner?(@performance)
       @performance.destroy
       redirect_to performances_path, notice: "Your performance, #{@performance.title}, has been deleted successfully"
     end
@@ -48,49 +47,47 @@ class PerformancesController < ApplicationController
 
   private
 
-  def not_owner(performance)
-    message = 'You do not have permission to delete this performance as you are not the owner'
-    return redirect_to performance_path(performance), alert: message if performance.user != current_user
-    false
+  def found_performance
+    Performance.find_by_id(params[:id])
   end
 
   def performance_params
     params.require(:performance).permit(:title, :image, :video, :audio)
   end
 
+  def owner?(performance, message = 'You are not the owner of this performance.')
+    return true if performance.user == current_user
+    redirect_to performance_path(performance), alert: message
+    false
+  end
+
   def verify_create(performance)
-    if performance[:title].blank?
+    if title_blank?(performance)
       redirect_to new_performance_path, alert: 'Oops! It looks like you forgot to enter a title.'
       return false
     elsif Performance.where(['user_id = ? and title = ?', current_user.id, performance[:title]]).present?
       redirect_to new_performance_path, alert: 'Oops! It looks like this performance already exists.'
       return false
     end
-
     true
   end
 
   def verify_edit(performance)
-    if performance.blank?
-      redirect_to performances_path, alert: 'Oops! Performance not found.'
-      return false
-    elsif performance.user_id != current_user.id
-      redirect_to performance_path, id: performance.id, alert: 'Oops! You cannot edit this performance since you are not the owner.'
-      return false
-    end
-
-    true
+    return true if performance && owner?(performance, 'Oops! You cannot edit this performance since you are not the owner.')
+    redirect_to performances_path, alert: 'Oops! Performance not found.' if performance.blank?
+    false
   end
 
   def verify_update(old_performance, new_performance)
-    if new_performance[:title].blank?
+    if title_blank?(new_performance)
       redirect_to edit_performance_path, id: old_performance.id, alert: 'Oops! It looks like you forgot to enter a title.'
       return false
-    elsif old_performance.user_id != current_user.id
-      redirect_to performance_path, id: old_performance.id, alert: 'Oops! You cannot edit this performance since you are not the owner.'
-      return false
     end
+    return true if owner?(old_performance)
+    false
+  end
 
-    true
+  def title_blank?(performance)
+    performance[:title].blank? ? true : false
   end
 end

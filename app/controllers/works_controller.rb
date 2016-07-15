@@ -6,7 +6,7 @@ class WorksController < ApplicationController
   end
 
   def show
-    @work = Work.find_by_id(params[:id])
+    @work = found_work
   end
 
   def new
@@ -23,49 +23,47 @@ class WorksController < ApplicationController
   end
 
   def edit
-    @work = Work.find_by_id(params[:id])
+    @work = found_work
     verify_edit @work
   end
 
   def update
-    @work = Work.find_by_id(params[:id])
-    work = work_params
+    @work = found_work
+    new_work = work_params
 
-    if verify_update @work, work
-      @work.update_attributes(work)
+    if verify_update(@work, new_work)
+      @work.update_attributes(new_work)
       redirect_to work_path(@work), notice: 'Your work has been updated successfully!'
     end
   end
 
   def destroy
-    @work = Work.find_by_id(params[:id])
+    @work = found_work
     return redirect_to works_path if @work.blank?
-    if not_owner(@work) == false
+    if owner?(@work, 'You do not have permission to delete this work as you are not the owner')
       @work.destroy
       redirect_to works_path, notice: "Your work, #{@work.title}, has been deleted successfully"
     end
-    # if @work.user == current_user
-    #   @work.destroy
-    #   redirect_to works_path, notice: "Your work, #{@work.title}, has been deleted successfully"
-    # else
-    #   redirect_to work_path(@work), alert: 'You do not have permission to delete this work'
-    # end
   end
 
   private
 
-  def not_owner(work)
-    message = 'You do not have permission to delete this work as you are not the owner'
-    return redirect_to work_path(work), alert: message if work.user != current_user
-    false
+  def found_work
+    Work.find_by_id(params[:id])
   end
 
   def work_params
     params.require(:work).permit(:title, :description, :instrumentation)
   end
 
+  def owner?(work, message = 'You are not the owner of this work.')
+    return true if work.user == current_user
+    redirect_to work_path(work), alert: message
+    false
+  end
+
   def verify_create(work)
-    if work[:title].blank?
+    if title_blank?(work)
       redirect_to new_work_path, alert: 'Oops! It looks like you forgot to enter a title.'
       return false
     elsif Work.where(['user_id = ? and title = ?', current_user.id, work[:title]]).present?
@@ -76,24 +74,21 @@ class WorksController < ApplicationController
   end
 
   def verify_edit(work)
-    if work.blank?
-      redirect_to works_path, alert: 'Oops! Work not found.'
-      return false
-    elsif work.user_id != current_user.id
-      redirect_to work_path, id: work.id, alert: 'Oops! You cannot edit this work since you are not the owner.'
-      return false
-    end
-    true
+    return true if work && owner?(work, 'Oops! You cannot edit this work since you are not the owner.')
+    redirect_to works_path, alert: 'Oops! Work not found.' if work.blank?
+    false
   end
 
   def verify_update(old_work, new_work)
-    if new_work[:title].blank?
+    if title_blank?(new_work)
       redirect_to edit_work_path, id: old_work.id, alert: 'Oops! It looks like you forgot to enter a title.'
       return false
-    elsif old_work.user_id != current_user.id
-      redirect_to work_path, id: old_work.id, alert: 'Oops! You cannot edit this work since you are not the owner.'
-      return false
     end
-    true
+    return true if owner?(old_work, 'Oops! You cannot edit this work since you are not the owner.')
+    false
+  end
+
+  def title_blank?(work)
+    work[:title].blank? ? true : false
   end
 end
