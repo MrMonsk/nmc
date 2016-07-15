@@ -6,7 +6,7 @@ class WorksController < ApplicationController
   end
 
   def show
-    @work = Work.find_by_id(params[:id])
+    @work = found_work
   end
 
   def new

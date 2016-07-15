@@ -1,35 +1,35 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/ubuntu/workspace/app/helpers/application_helper.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/workspace/app/helpers/beta_candidates_helper.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/helpers/beta_candidates_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/workspace/app/helpers/performances_helper.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/helpers/performances_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/workspace/app/helpers/profiles_helper.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/helpers/profiles_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/workspace/app/helpers/static_pages_helper.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/helpers/static_pages_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/workspace/app/helpers/users_helper.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/helpers/users_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/workspace/app/helpers/works_helper.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/helpers/works_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/workspace/app/controllers/beta_candidates_controller.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/controllers/beta_candidates_controller.rb": [
         1,
         1,
         9,
@@ -47,14 +47,14 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/app/controllers/application_controller.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/controllers/application_controller.rb": [
         1,
         null,
         null,
         1,
         null
       ],
-      "/home/ubuntu/workspace/app/controllers/performances_controller.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/controllers/performances_controller.rb": [
         1,
         1,
         null,
@@ -149,25 +149,8 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/app/controllers/profiles_controller.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/controllers/profiles_controller.rb": [
         1,
-        1,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
         1,
         null,
         1,
@@ -176,6 +159,37 @@
         null,
         1,
         0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
         0,
         0,
         0,
@@ -195,7 +209,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/app/controllers/static_pages_controller.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/controllers/static_pages_controller.rb": [
         1,
         1,
         null,
@@ -208,7 +222,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/app/controllers/users_controller.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/controllers/users_controller.rb": [
         1,
         1,
         0,
@@ -226,7 +240,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/app/controllers/works_controller.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/controllers/works_controller.rb": [
         1,
         1,
         null,
@@ -278,7 +292,7 @@
         1,
         null,
         1,
-        17,
+        19,
         null,
         null,
         1,
@@ -322,17 +336,12 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/app/models/beta_candidate.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/models/beta_candidate.rb": [
         1,
         1,
         null
       ],
-      "/home/ubuntu/workspace/app/models/profile.rb": [
-        1,
-        1,
-        null
-      ],
-      "/home/ubuntu/workspace/app/uploaders/work_uploader.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/uploaders/work_uploader.rb": [
         0,
         0,
         0,
@@ -385,13 +394,7 @@
         0,
         0
       ],
-      "/home/ubuntu/workspace/app/models/performance.rb": [
-        0,
-        0,
-        0,
-        0
-      ],
-      "/home/ubuntu/workspace/app/models/user.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/models/user.rb": [
         0,
         0,
         0,
@@ -403,17 +406,28 @@
         0,
         0
       ],
-      "/home/ubuntu/workspace/app/models/work.rb": [
+      "/home/mikeysax/Desktop/Code/nmc/app/models/performance.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/mikeysax/Desktop/Code/nmc/app/models/work.rb": [
         0,
         0,
         0,
         0,
         0,
+        0,
+        0,
+        0
+      ],
+      "/home/mikeysax/Desktop/Code/nmc/app/models/profile.rb": [
         0,
         0,
         0
       ]
     },
-    "timestamp": 1468507660
+    "timestamp": 1468546722
   }
 }

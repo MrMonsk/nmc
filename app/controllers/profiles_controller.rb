@@ -1,13 +1,24 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!
+    before_action :authenticate_user!, only: [:show, :create, :edit, :update]
+
+  def show
+    @profile = found_profile
+  end
+
+  def new
+    @profile = Profile.new
+  end
+
+  def create
+  end
 
   def edit
-    @profile = Profile.find_by_id(params[:id])
+    @profile = found_profile
     verify_edit(@profile)
   end
 
   def update
-    @profile = Profile.find_by_id(params[:id])
+    @profile = found_profile
     new_profile = profile_params
 
     if verify_update(@profile, new_profile)
@@ -18,12 +29,15 @@ class ProfilesController < ApplicationController
 
   private
 
+  def found_profile
+    Profile.find_by_id(params[:id])
+  end
+
   def profile_params
     params.require(:profile).permit(:bio, :url, :stage_name, :image)
   end
 
-  def owner?(profile)
-    message = 'You are not the owner of this performance.'
+  def owner?(profile, message = 'You are not the owner of this performance.')
     return true if profile.user_id == current_user.id
     redirect_to profile_path(profile), alert: message
     false
