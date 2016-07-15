@@ -44,15 +44,14 @@ class ProfilesController < ApplicationController
   end
 
   def verify_edit(profile)
-    redirect_to profile_path, alert: 'Oops! Profile not found.' if profile.blank?
     return true if owner?(profile)
+    redirect_to profile_path, alert: 'Oops! Profile not found.' if profile.blank?
     false
   end
 
-  def verify_update(old_profile, new_profile)
-    message = 'Oops! It looks like you forgot to enter a bio.'
-    redirect_to edit_profile_path, id: old_profile.id, alert: message if new_profile[:bio].blank?
+  def verify_update(old_profile, new_profile, message = 'Oops! It looks like you forgot to enter a bio.')
     return true if owner?(old_profile)
+    redirect_to edit_profile_path, id: old_profile.id, alert: message if new_profile[:bio].blank?
     false
   end
 end
