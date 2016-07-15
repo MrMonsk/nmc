@@ -1,13 +1,5 @@
 class ProfilesController < ApplicationController
-    before_action :authenticate_user!, only: [:show, :create, :edit, :update]
-
-  def show
-    @profile = found_profile
-  end
-
-  def new
-    @profile = Profile.new
-  end
+    before_action :authenticate_user!, only: [:create, :edit, :update]
 
   def create
   end
@@ -44,14 +36,17 @@ class ProfilesController < ApplicationController
   end
 
   def verify_edit(profile)
-    return true if owner?(profile)
+    return true if profile && owner?(profile)
     redirect_to profile_path, alert: 'Oops! Profile not found.' if profile.blank?
     false
   end
 
   def verify_update(old_profile, new_profile, message = 'Oops! It looks like you forgot to enter a bio.')
+    if new_profile[:bio].blank?
+      redirect_to edit_profile_path, id: old_profile.id, alert: message
+      return false
+    end
     return true if owner?(old_profile)
-    redirect_to edit_profile_path, id: old_profile.id, alert: message if new_profile[:bio].blank?
     false
   end
 end

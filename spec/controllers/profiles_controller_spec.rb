@@ -6,28 +6,6 @@ RSpec.describe ProfilesController, type: :controller do
     sign_in @user
   end
 
-  describe 'GET /show' do
-    before(:each) do
-      @profile = create :profile_valid
-      get :show, id: @profile.id
-    end
-
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
-    end
-
-    it 'assigns profile to @profile' do
-      expect(assigns(:profile)).to eq(@profile)
-    end
-  end
-
-  describe 'GET /new' do
-    it 'returns http success' do
-      get :new
-      expect(response).to have_http_status(:success)
-    end
-  end
-
   # describe 'POST /create' do
   #   context 'when profile is valid' do
   #     before(:each) do
@@ -81,17 +59,6 @@ RSpec.describe ProfilesController, type: :controller do
       @profile = create :profile_valid
     end
 
-    context 'when user is the owner and the profile exists' do
-      before(:each) do
-        get :edit, id: @profile.id
-      end
-
-      it 'returns http success' do
-        get :new
-        expect(response).to have_http_status(:success)
-      end
-    end
-
     context 'when user is the owner and the profile does not exist' do
       before(:each) do
         get :edit, id: 'invalid'
@@ -126,8 +93,7 @@ RSpec.describe ProfilesController, type: :controller do
 
   describe 'PATCH /update' do
     before(:each) do
-      @profile = create :profile_valid
-      # @user.profile << @profile
+      @profile = create(:profile_valid, user_id: @user.id)
     end
 
     context 'when update is valid' do

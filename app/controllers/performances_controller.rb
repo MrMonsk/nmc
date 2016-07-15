@@ -73,8 +73,8 @@ class PerformancesController < ApplicationController
   end
 
   def verify_edit(performance)
-    redirect_to performances_path, alert: 'Oops! Performance not found.' if performance.blank?
     return true if performance && owner?(performance, 'Oops! You cannot edit this performance since you are not the owner.')
+    redirect_to performances_path, alert: 'Oops! Performance not found.' if performance.blank?
     false
   end
 

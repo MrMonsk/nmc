@@ -74,8 +74,8 @@ class WorksController < ApplicationController
   end
 
   def verify_edit(work)
-    redirect_to works_path, alert: 'Oops! Work not found.' if work.blank?
     return true if work && owner?(work, 'Oops! You cannot edit this work since you are not the owner.')
+    redirect_to works_path, alert: 'Oops! Work not found.' if work.blank?
     false
   end
 
