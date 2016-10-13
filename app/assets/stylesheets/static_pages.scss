@@ -38,3 +38,15 @@
   max-width: 100%;
   color:white;
 }
+
+.project, .score {
+  height: 100%;
+}
+
+.score {
+  background: url('chopin.png') no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

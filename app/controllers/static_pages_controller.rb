@@ -8,4 +8,8 @@ class StaticPagesController < ApplicationController
 
   def about
   end
+  
+  def project
+    render layout: false
+  end
 end

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ursatz</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="//fast.appcues.com/20220.js"></script>
+  <script type="text/javascript">
+    Appcues.identify("12345", { // Unique identifier for current user
+        name: "John Doe", // Current user's name
+        email: "john.doe@example.com", // Current user's email
+        created_at: 1234567890, // Unix timestamp of user signup date
+    });
+  </script>
+</head>
+<body>
+  <div class="container col-xs-10 col-xs-offset-1">
+    <h1 class="text-xs-center">Some Tune</h1>
+    <%= image_tag "chopin.png", class: "col-xs-12" %>
+  </div>
+</body>

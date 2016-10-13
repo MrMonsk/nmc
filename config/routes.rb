@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'static_pages/about'
+  get 'static_pages/project'
   devise_for :users
   root 'static_pages#home'
   resources :beta_candidates, only: :create
