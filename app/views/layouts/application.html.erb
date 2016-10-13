@@ -5,10 +5,26 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script>
+    $(document).ready(function(){
+      $('.navbar').hide();
+    
+    $(function() {
+      if($(this).scrollTop() > 70) {
+        $('.navbar').fadeIn();
+      } else {
+        $('.navbar').fadeOut();
+      }
+    });
+  });
+});
+    }(jQuery));
+  </script>
+  <script src="//fast.appcues.com/14014.js"></script>
 </head>
 <body class="body-content">
 <div id="wrap">
-  <nav class="navbar navbar-light", style="background: rgba(255,255,255, 0.9)">
+  <nav class="navbar navbar-full navbar-light", style="background: rgba(255,255,255, 0.9)">
     <div class="container">
       <div class="nav navbar-nav">
         <a class="nav-item nav-link active brand" href="/static_pages">Ursatz<span class="sr-only">(current)</span></a>
@@ -73,6 +89,7 @@
 </div>
 <div id="footer">
   <div class="container">
+    <br />
     <h6 style="font-family: 'Pacifico', cursive">Ursatz</h6>
     <br />
      <%= link_to 'About', static_pages_about_path %>
